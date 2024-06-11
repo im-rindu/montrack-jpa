@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.montrack_jpa.CustomResponse;
@@ -41,7 +42,7 @@ public class WalletController {
   @PostMapping
   public ResponseEntity<CustomResponse<Object>> createWallet(@RequestBody Wallet wallet) {
     return walletService.createWallet(wallet);
-    }
+  }
     
   @PutMapping("/{id}")
   public ResponseEntity<CustomResponse<Wallet>> updateWallet(@PathVariable Integer id, @RequestBody Wallet wallet) {
@@ -55,9 +56,24 @@ public class WalletController {
     return walletService.deleteWallet(id, true);
   }
     
-  @PutMapping("/{id}/undelete")
+  @PutMapping("/{id}/restore")
   public ResponseEntity<CustomResponse<Object>> unDeleteWallet(@PathVariable Integer id) {
     return walletService.deleteWallet(id, false);
+  }
+
+  @PutMapping("/change_active")
+  public ResponseEntity<CustomResponse<Object>> changeActiveWallet(@RequestParam Integer user_id, @RequestParam Integer wallet_id) {
+    return walletService.changeActiveWallet(user_id, wallet_id);
+  }
+
+  @GetMapping("/{id}/transactions")
+  public ResponseEntity<CustomResponse<Object>> lastestTrades(@PathVariable Integer id, @RequestParam(required = false) String start_date, @RequestParam(required = false) String end_date, @RequestParam Integer page, @RequestParam Integer limit) {
+    return walletService.lastestTrades(id, page, limit, start_date, end_date);
+  }
+
+  @GetMapping("/user/{userId}/summary")
+  public ResponseEntity<CustomResponse<Object>> getSummaryWallet(@PathVariable Integer userId, @RequestParam(required = false) String range) {
+    return walletService.getSummaryWallet(userId, range);
   }
 
 }
