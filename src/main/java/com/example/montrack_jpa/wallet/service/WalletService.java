@@ -1,4 +1,4 @@
-package com.example.montrack_jpa.wallet;
+package com.example.montrack_jpa.wallet.service;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -17,8 +17,10 @@ import org.springframework.stereotype.Service;
 import com.example.montrack_jpa.CustomResponse;
 import com.example.montrack_jpa.trade.Trade;
 import com.example.montrack_jpa.trade.TradeRepository;
-import com.example.montrack_jpa.user.User;
-import com.example.montrack_jpa.user.UserRepository;
+import com.example.montrack_jpa.user.entity.User;
+import com.example.montrack_jpa.user.repository.UserRepository;
+import com.example.montrack_jpa.wallet.entity.Wallet;
+import com.example.montrack_jpa.wallet.repository.WalletRepository;
 
 @Service
 public class WalletService {
@@ -204,18 +206,23 @@ public class WalletService {
     User user = checkUser(userId);
     LocalDate dateRange = LocalDate.now();
     
-    if(range.toLowerCase().equals("week")){
-      dateRange = dateRange.minusDays(7);
-    }else if(range.toLowerCase().equals("month")){
-      dateRange = dateRange.minusMonths(1);
-    }else if(range.toLowerCase().equals("year")){
-      dateRange = dateRange.minusYears(1);
-    }else if(range.toLowerCase().equals("day")){
-      dateRange = dateRange.minusDays(1);
-    }
-    else{
-      range = "all time";
-      dateRange = dateRange.minusYears(10);
+    switch (range.toLowerCase()) {
+      case "week":
+        dateRange = dateRange.minusDays(7);
+        break;
+      case "month":
+        dateRange = dateRange.minusMonths(1);
+        break;
+      case "year":
+        dateRange = dateRange.minusYears(1);
+        break;
+      case "day":
+        dateRange = dateRange.minusDays(1);
+        break;
+      default:
+        range = "all time";
+        dateRange = dateRange.minusYears(100);
+        break;
     }
 
     if(user == null) {

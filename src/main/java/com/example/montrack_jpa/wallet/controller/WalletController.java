@@ -1,4 +1,4 @@
-package com.example.montrack_jpa.wallet;
+package com.example.montrack_jpa.wallet.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -6,12 +6,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.montrack_jpa.CustomResponse;
+import com.example.montrack_jpa.wallet.entity.Wallet;
+import com.example.montrack_jpa.wallet.service.WalletService;
 
 @RestController
 @RequestMapping("/api/v1/wallet")
@@ -51,11 +54,11 @@ public class WalletController {
     return response.toResponseEntity();
   }
 
-  @PutMapping("/{id}/delete")
+  @DeleteMapping("/{id}")
   public ResponseEntity<CustomResponse<Object>> deleteWallet(@PathVariable Integer id) {
     return walletService.deleteWallet(id, true);
   }
-    
+  
   @PutMapping("/{id}/restore")
   public ResponseEntity<CustomResponse<Object>> unDeleteWallet(@PathVariable Integer id) {
     return walletService.deleteWallet(id, false);

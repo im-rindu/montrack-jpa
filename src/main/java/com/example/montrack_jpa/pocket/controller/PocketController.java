@@ -1,4 +1,4 @@
-package com.example.montrack_jpa.pocket;
+package com.example.montrack_jpa.pocket.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.montrack_jpa.CustomResponse;
+import com.example.montrack_jpa.pocket.entity.Pocket;
+import com.example.montrack_jpa.pocket.service.PocketService;
 
 @RestController
 @RequestMapping("/api/v1/pocket")

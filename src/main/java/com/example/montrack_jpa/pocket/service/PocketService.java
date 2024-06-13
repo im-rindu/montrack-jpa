@@ -1,4 +1,4 @@
-package com.example.montrack_jpa.pocket;
+package com.example.montrack_jpa.pocket.service;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -10,8 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.example.montrack_jpa.CustomResponse;
-import com.example.montrack_jpa.wallet.Wallet;
-import com.example.montrack_jpa.wallet.WalletRepository;
+import com.example.montrack_jpa.pocket.entity.Pocket;
+import com.example.montrack_jpa.pocket.repository.PocketRepository;
+import com.example.montrack_jpa.wallet.entity.Wallet;
+import com.example.montrack_jpa.wallet.repository.WalletRepository;
 
 @Service
 public class PocketService {
@@ -152,4 +154,5 @@ public class PocketService {
     }
     return pocket.get();
   }
+  
 }

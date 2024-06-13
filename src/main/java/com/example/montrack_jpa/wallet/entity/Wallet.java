@@ -1,10 +1,10 @@
-package com.example.montrack_jpa.wallet;
+package com.example.montrack_jpa.wallet.entity;
 
 import java.time.Instant;
 
 import org.hibernate.annotations.ColumnDefault;
 
-import com.example.montrack_jpa.user.User;
+import com.example.montrack_jpa.user.entity.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;

@@ -14,7 +14,7 @@ public class CustomResponse<T> {
 
   public CustomResponse(HttpStatus status, String statusMessage, String message, T data){
     this.status = status.value();
-    this.statusMessage = statusMessage;
+    this.statusMessage = status.getReasonPhrase();
     this.message = message;
     this.data = data;
   }

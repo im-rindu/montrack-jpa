@@ -1,0 +1,65 @@
+// package com.example.montrack_jpa;
+
+// import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.context.annotation.Bean;
+// import org.springframework.context.annotation.Configuration;
+
+// import jakarta.annotation.PostConstruct;
+// import java.nio.file.Files;
+// import java.nio.file.Paths;
+// import java.security.KeyFactory;
+// import java.security.PrivateKey;
+// import java.security.PublicKey;
+// import java.security.spec.PKCS8EncodedKeySpec;
+// import java.security.spec.X509EncodedKeySpec;
+// import java.util.Base64;
+
+// @Configuration
+// public class RsaKeyLoader {
+
+//     @Autowired
+//     private RsaKeyProperties rsaKeyProperties;
+
+//     private PrivateKey privateKey;
+//     private PublicKey publicKey;
+
+//     @PostConstruct
+//     public void init() throws Exception {
+//         this.privateKey = loadPrivateKey();
+//         this.publicKey = loadPublicKey();
+//     }
+
+//     private PrivateKey loadPrivateKey() throws Exception {
+//         String privateKeyPath = rsaKeyProperties.getPrivateKey().replace("classpath:", "");
+//         byte[] keyBytes = Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource(privateKeyPath).toURI()));
+//         String privateKeyContent = new String(keyBytes)
+//                 .replaceAll("\\n", "")
+//                 .replace("-----BEGIN PRIVATE KEY-----", "")
+//                 .replace("-----END PRIVATE KEY-----", "");
+//         PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(Base64.getDecoder().decode(privateKeyContent));
+//         KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+//         return keyFactory.generatePrivate(keySpec);
+//     }
+
+//     private PublicKey loadPublicKey() throws Exception {
+//         String publicKeyPath = rsaKeyProperties.getPublicKey().replace("classpath:", "");
+//         byte[] keyBytes = Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource(publicKeyPath).toURI()));
+//         String publicKeyContent = new String(keyBytes)
+//                 .replaceAll("\\n", "")
+//                 .replace("-----BEGIN PUBLIC KEY-----", "")
+//                 .replace("-----END PUBLIC KEY-----", "");
+//         X509EncodedKeySpec keySpec = new X509EncodedKeySpec(Base64.getDecoder().decode(publicKeyContent));
+//         KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+//         return keyFactory.generatePublic(keySpec);
+//     }
+
+//     @Bean
+//     public PrivateKey privateKey() {
+//         return this.privateKey;
+//     }
+
+//     @Bean
+//     public PublicKey publicKey() {
+//         return this.publicKey;
+//     }
+// }
